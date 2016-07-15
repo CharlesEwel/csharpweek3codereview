@@ -11,6 +11,7 @@ This program will model a hair salon with different stylists and clients and all
 This program can only be accessed on a PC with Windows 10, and with git and atom installed.
 
 * Clone this repository
+* 
 * Type following command into the Windows PowerShell > dnu restore
 * Type following command into PowerShell > dnx kestrel
 * Open Chrome and type in the following address: "localhost:5004"
