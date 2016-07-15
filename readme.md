@@ -22,7 +22,7 @@ No known bugs.
 ## Specifications
 
 The program should ... | Example Input | Example Output | Why'd we choose this?
------ | ----- | -----
+----- | ----- | ----- | ------
 Allow user to add stylist| User fills out a form with stylist information | That stylist is added to a list of stylists | This is the basic functionality for save and get all for our stylist class
 Allow user to add stylist|User fills out a form with client information, including which stylist they see | Client is added to a list of clients, with stylist information displayed therein | This allows us to test save and get all for client, along with find functionality for stylist
 Allow user to click individual stylist from list of stylists and see all clients serviced by that stylist | Clicks "Tracy" on /stylists page | is taken to /stylist/Tracy page that has list of clients serviced by Tracy | Allow us to test our GetClients methods for our stylist object, and explemifies the link between the two tables
