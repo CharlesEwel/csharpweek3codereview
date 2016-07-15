@@ -69,31 +69,31 @@ namespace HairSalon.Tests
       //Assert
       Assert.Equal(expectedResult, result);
     }
-    // [Fact]
-    // public void Test_Delete_DeletesStylistAndClientsByStylistId()
-    // {
-    //   //Arrange
-    //   Stylist firstStylist = new Stylist("Tracy");
-    //   firstStylist.Save();
-    //   Stylist secondStylist = new Stylist("Chad");
-    //   secondStylist.Save();
-    //
-    //   Client firstClient = new Client("Jasper", firstStylist.GetId());
-    //   firstClient.Save();
-    //   Client secondClient = new Client("Wendy", secondStylist.GetId());
-    //   secondClient.Save();
-    //
-    //   List<Stylist> expectedStylist = new List<Stylist>{firstStylist};
-    //   List<Client> expectedResult = new List<Client> {firstClient};
-    //   //Act
-    //   secondStylist.Delete();
-    //
-    //   List<Stylist> resultingStylist = Stylist.GetAll();
-    //   List<Client> result = Client.GetAll();
-    //   //Assert
-    //   Assert.Equal(expectedStylist, resultingStylist);
-    //   Assert.Equal(expectedResult, result);
-    // }
+    [Fact]
+    public void Test_Delete_DeletesStylistAndClientsByStylistId()
+    {
+      //Arrange
+      Stylist firstStylist = new Stylist("Tracy", 17);
+      firstStylist.Save();
+      Stylist secondStylist = new Stylist("Chad", 10);
+      secondStylist.Save();
+
+      Client firstClient = new Client("Jasper", "brunette", firstStylist.GetId());
+      firstClient.Save();
+      Client secondClient = new Client("Wendy", "blonde", secondStylist.GetId());
+      secondClient.Save();
+
+      List<Stylist> expectedStylist = new List<Stylist>{firstStylist};
+      List<Client> expectedResult = new List<Client> {firstClient};
+      //Act
+      secondStylist.Delete();
+
+      List<Stylist> resultingStylist = Stylist.GetAll();
+      List<Client> result = Client.GetAll();
+      //Assert
+      Assert.Equal(expectedStylist, resultingStylist);
+      Assert.Equal(expectedResult, result);
+    }
 
     public void Dispose()
     {

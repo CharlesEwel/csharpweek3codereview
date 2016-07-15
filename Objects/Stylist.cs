@@ -94,8 +94,6 @@ namespace HairSalon.Objects
       stylistIdParameter.ParameterName = "@stylistId";
       stylistIdParameter.Value = this.GetId().ToString();
 
-
-
       cmd.Parameters.Add(stylistIdParameter);
 
       rdr = cmd.ExecuteReader();
@@ -192,30 +190,30 @@ namespace HairSalon.Objects
       }
       return newStylist;
     }
-    // public void Delete()
-    // {
-    //   List<Client> clientsToDelete = this.GetClients();
-    //   foreach (Client item in clientsToDelete)
-    //   {
-    //     item.Delete();
-    //   }
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id = @StylistId;", conn);
-    //
-    //   SqlParameter stylistIdParameter = new SqlParameter();
-    //   stylistIdParameter.ParameterName = "@StylistId";
-    //   stylistIdParameter.Value = this.GetId();
-    //
-    //   cmd.Parameters.Add(stylistIdParameter);
-    //   cmd.ExecuteNonQuery();
-    //
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+    public void Delete()
+    {
+      List<Client> clientsToDelete = this.GetClients();
+      foreach (Client item in clientsToDelete)
+      {
+        item.Delete();
+      }
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id = @StylistId;", conn);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
