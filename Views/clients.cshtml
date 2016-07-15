@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Clients</title>
+    <title>Clients</title>  
   </head>
   <body>
     <h1>Clients</h1>
@@ -14,7 +14,7 @@
     {
       foreach(var individualClient in Model)
       {
-        <li>@individualClient.GetName()</li>
+        <li><a href="/client/@individualClient.GetId()">@individualClient.GetName()</a></li>
       }
     }
     <a href="/client/new">Add a New Client</a>

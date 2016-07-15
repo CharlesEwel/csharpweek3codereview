@@ -17,12 +17,14 @@
       <form class="form-group" action="/client/new/success" method="post">
         <label for="client-name">Client Name:</label>
         <input type="text" name="client-name" required>
+        <label for="hair-color">Hair Color</label>
         <select name="hair-color">
           <option>Blonde</option>
           <option>Brunette</option>
           <option>Red</option>
           <option>Other</option>
         </select>
+        <label for="stylist-id">Stylist</label>
         <select name="stylist-id">
           @foreach(var individualStylist in Model)
           {

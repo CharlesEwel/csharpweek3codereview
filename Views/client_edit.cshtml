@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Client: @Model["client"].GetName()</title>
+  </head>
+  <body>
+    <h1>@Model["client"].GetName()</h1>
+    <form class="form-group" action="/client/edit/success" method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="client-id" value='@Model["client"].GetId()'>
+      <label for="hair-color">Change Hair Color</label>
+      <select name="hair-color">
+        <option>Blonde</option>
+        <option>Brunette</option>
+        <option>Red</option>
+        <option>Other</option>
+      </select>
+      <label for="stylist-id">Change Stylist</label>
+      <select name="stylist-id">
+        @foreach(var individualStylist in Model["stylists"])
+        {
+          <option value='@individualStylist.GetId()'>@individualStylist.GetName()</option>
+        }
+      </select>
+      <button type="submit" name="button">Add Client</button>
+    </form>
+  </body>
+</html>

@@ -62,6 +62,34 @@ namespace HairSalon
         List<Client> allClients = Client.GetAll();
         return View["clients.cshtml", allClients];
       };
+
+      Get["/stylist/{id}"]=parameters=>{
+        Stylist currentStylist = Stylist.Find(parameters.id);
+        List<Client> currentClients = currentStylist.GetClients();
+        return View["clients.cshtml", currentClients];
+      };
+
+      Get["/client/{id}"]=parameters=>{
+        Client currentClient = Client.Find(parameters.id);
+        return View["client.cshtml", currentClient];
+      };
+
+      Get["/client/edit/{id}"]=parameters=>{
+        Dictionary<string, object> model=new Dictionary<string, object>{};
+        var currentClient = Client.Find(parameters.id);
+        var allStylists = Stylist.GetAll();
+        model.Add("client", currentClient);
+        model.Add("stylists", allStylists);
+        return View["client_edit.cshtml", model];
+      };
+
+      Patch["/client/edit/success"]=_=>{
+        Client currentClient = Client.Find(Request.Form["client-id"]);
+        currentClient.SetHairColor(Request.Form["hair-color"]);
+        currentClient.SetStylistId(Request.Form["stylistId"]);
+        List<Client> allClients = Client.GetAll();
+        return View["clients.cshtml", allClients];
+      };
     }
   }
 }
