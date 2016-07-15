@@ -39,92 +39,66 @@ namespace HairSalon.Objects
     public void SetName(string newName)
     {
       _name = newName;
-      // SqlConnection conn = DB.Connection();
-      // SqlDataReader rdr = null;
-      // conn.Open();
-      //
-      // SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @clientName where id = @id;", conn);
-      //
-      // SqlParameter nameParameter = new SqlParameter();
-      // nameParameter.ParameterName = "@clientName";
-      // nameParameter.Value = newName;
-      //
-      // SqlParameter idParameter = new SqlParameter();
-      // idParameter.ParameterName = "@id";
-      // idParameter.Value = this.GetId();
-      //
-      // cmd.Parameters.Add(nameParameter);
-      // cmd.Parameters.Add(idParameter);
-      // rdr = cmd.ExecuteReader();
-      //
-      // if (rdr != null)
-      // {
-      //   rdr.Close();
-      // }
-      // if (conn != null)
-      // {
-      //   conn.Close();
-      // }
     }
     public void SetHairColor(string newHairColor)
     {
       _hairColor = newHairColor;
-      // SqlConnection conn = DB.Connection();
-      // SqlDataReader rdr = null;
-      // conn.Open();
-      //
-      // SqlCommand cmd = new SqlCommand("UPDATE clients SET user_id = @userId where id = @id;", conn);
-      //
-      // SqlParameter userIdParameter = new SqlParameter();
-      // userIdParameter.ParameterName = "@userId";
-      // userIdParameter.Value = newUserId.ToString();
-      //
-      // SqlParameter idParameter = new SqlParameter();
-      // idParameter.ParameterName = "@id";
-      // idParameter.Value = this.GetId();
-      //
-      // cmd.Parameters.Add(userIdParameter);
-      // cmd.Parameters.Add(idParameter);
-      // rdr = cmd.ExecuteReader();
-      //
-      // if (rdr != null)
-      // {
-      //   rdr.Close();
-      // }
-      // if (conn != null)
-      // {
-      //   conn.Close();
-      // }
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET hair_color = @userHairColor where id = @id;", conn);
+
+      SqlParameter hairColorParameter = new SqlParameter();
+      hairColorParameter.ParameterName = "@userHairColor";
+      hairColorParameter.Value = newHairColor;
+
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@id";
+      idParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(hairColorParameter);
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
     public void SetStylistId(int newStylistId)
     {
       _stylistId = newStylistId;
-      // SqlConnection conn = DB.Connection();
-      // SqlDataReader rdr = null;
-      // conn.Open();
-      //
-      // SqlCommand cmd = new SqlCommand("UPDATE clients SET stylist_id = @stylistId where id = @id;", conn);
-      //
-      // SqlParameter stylistIdParameter = new SqlParameter();
-      // stylistIdParameter.ParameterName = "@stylistId";
-      // stylistIdParameter.Value = newStylistId.ToString();
-      //
-      // SqlParameter idParameter = new SqlParameter();
-      // idParameter.ParameterName = "@id";
-      // idParameter.Value = this.GetId();
-      //
-      // cmd.Parameters.Add(stylistIdParameter);
-      // cmd.Parameters.Add(idParameter);
-      // rdr = cmd.ExecuteReader();
-      //
-      // if (rdr != null)
-      // {
-      //   rdr.Close();
-      // }
-      // if (conn != null)
-      // {
-      //   conn.Close();
-      // }
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET stylist_id = @stylistId where id = @id;", conn);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@stylistId";
+      stylistIdParameter.Value = newStylistId.ToString();
+
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@id";
+      idParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
 
     public override bool Equals(System.Object otherClient)

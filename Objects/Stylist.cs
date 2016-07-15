@@ -37,6 +37,32 @@ namespace HairSalon.Objects
     public void SetPrice(int newPrice)
     {
       _price = newPrice;
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE stylists SET price = @price where id = @id;", conn);
+
+      SqlParameter priceParameter = new SqlParameter();
+      priceParameter.ParameterName = "@price";
+      priceParameter.Value = newPrice.ToString();
+
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@id";
+      idParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(priceParameter);
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
 
     public override bool Equals(System.Object otherStylist)

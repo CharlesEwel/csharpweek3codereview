@@ -94,6 +94,20 @@ namespace HairSalon.Tests
       Assert.Equal(expectedStylist, resultingStylist);
       Assert.Equal(expectedResult, result);
     }
+    [Fact]
+    public void Test_SetPrice_AdjustsDatabaseCorrectly()
+    {
+      // Arrange
+      Stylist firstStylist = new Stylist("Tracy", 17);
+      firstStylist.Save();
+
+      //Act
+      firstStylist.SetPrice(15);
+      Stylist resultStylist = Stylist.Find(firstStylist.GetId());
+
+      //Assert
+      Assert.Equal(15, resultStylist.GetPrice());
+    }
 
     public void Dispose()
     {
