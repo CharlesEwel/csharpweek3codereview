@@ -14,7 +14,7 @@
     {
       foreach(var individualStylist in Model)
       {
-        <li>@individualStylist.GetName()</li>
+        <li><a href="/stylist/@individualStylist.GetId()"> @individualStylist.GetName() </a></li>
       }
     }
     <a href="/stylist/new">Add a New Stylist</a>
