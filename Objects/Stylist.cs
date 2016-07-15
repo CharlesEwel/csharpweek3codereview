@@ -39,16 +39,17 @@ namespace HairSalon.Objects
       _price = newPrice;
     }
 
-    // public override bool Equals(System.Object otherStylist)
-    // {
-    //   if(!(otherStylist is Stylist)) return false;
-    //   else
-    //   {
-    //     Stylist newStylist = (Stylist) otherStylist;
-    //     bool nameEquality = this.GetName() == newStylist.GetName();
-    //     return(nameEquality);
-    //   }
-    // }
+    public override bool Equals(System.Object otherStylist)
+    {
+      if(!(otherStylist is Stylist)) return false;
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool nameEquality = this.GetName() == newStylist.GetName();
+        bool priceEquality = this.GetPrice() == newStylist.GetPrice();
+        return(nameEquality && priceEquality);
+      }
+    }
 
     public static List<Stylist> GetAll()
     {
@@ -64,7 +65,8 @@ namespace HairSalon.Objects
       {
         int stylistId = rdr.GetInt32(0);
         string stylistName = rdr.GetString(1);
-        Stylist newStylist = new Stylist(stylistName, stylistId);
+        int stylistPrice = rdr.GetInt32(2);
+        Stylist newStylist = new Stylist(stylistName, stylistPrice, stylistId);
         allStylists.Add(newStylist);
       }
       if (rdr != null)
@@ -118,71 +120,78 @@ namespace HairSalon.Objects
     //   return allClientsMatchingStylist;
     // }
     //
-    // public void Save()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   SqlDataReader rdr;
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
-    //
-    //   SqlParameter nameParameter = new SqlParameter();
-    //   nameParameter.ParameterName = "@stylistName";
-    //   nameParameter.Value = this.GetName();
-    //
-    //   cmd.Parameters.Add(nameParameter);
-    //
-    //
-    //   rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     this._id = rdr.GetInt32(0);
-    //   }
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
-    // public static Stylist Find(int stylistId)
-    // {
-    //
-    //   SqlConnection conn = DB.Connection();
-    //   SqlDataReader rdr;
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE id = @stylistId;", conn);
-    //
-    //   SqlParameter stylistIdParameter = new SqlParameter();
-    //   stylistIdParameter.ParameterName = "@stylistId";
-    //   stylistIdParameter.Value = stylistId.ToString();
-    //
-    //   cmd.Parameters.Add(stylistIdParameter);
-    //
-    //   int foundStylistId = 0;
-    //   string stylistName = null;
-    //   rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     foundStylistId = rdr.GetInt32(0);
-    //     stylistName = rdr.GetString(1);
-    //   }
-    //   Stylist newStylist = new Stylist(stylistName, foundStylistId);
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return newStylist;
-    // }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name, price) OUTPUT INSERTED.id VALUES (@stylistName, @stylistPrice);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@stylistName";
+      nameParameter.Value = this.GetName();
+
+      SqlParameter priceParameter = new SqlParameter();
+      priceParameter.ParameterName = "@stylistPrice";
+      priceParameter.Value = this.GetPrice();
+
+      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(priceParameter);
+
+
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public static Stylist Find(int stylistId)
+    {
+
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE id = @stylistId;", conn);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@stylistId";
+      stylistIdParameter.Value = stylistId.ToString();
+
+      cmd.Parameters.Add(stylistIdParameter);
+
+      int foundStylistId = 0;
+      string foundStylistName = null;
+      int foundStylistPrice = 0;
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        foundStylistId = rdr.GetInt32(0);
+        foundStylistName = rdr.GetString(1);
+        foundStylistPrice = rdr.GetInt32(2);
+      }
+      Stylist newStylist = new Stylist(foundStylistName, foundStylistPrice, foundStylistId);
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return newStylist;
+    }
     // public void Delete()
     // {
     //   List<Client> clientsToDelete = this.GetClients();

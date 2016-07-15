@@ -25,32 +25,32 @@ namespace HairSalon.Tests
       Assert.Equal(0, result);
     }
 
-    // [Fact]
-    // public void Test_Save_SavesCorrectObjectToDatabase()
-    // {
-    //   //Arrange
-    //   Stylist newStylist = new Stylist("Tracy");
-    //
-    //   //Act
-    //   newStylist.Save();
-    //   Stylist savedStylist = Stylist.GetAll()[0];
-    //
-    //   //Assert
-    //   Assert.Equal(newStylist, savedStylist);
-    // }
-    // [Fact]
-    // public void Test_Find_ReturnsASpecificStylistObject()
-    // {
-    //   //Arrange
-    //   Stylist newStylist = new Stylist("Tracy");
-    //   newStylist.Save();
-    //
-    //   //Act
-    //   Stylist foundStylist = Stylist.Find(newStylist.GetId());
-    //
-    //   //Assert
-    //   Assert.Equal(newStylist, foundStylist);
-    // }
+    [Fact]
+    public void Test_Save_SavesCorrectObjectToDatabase()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Tracy", 17);
+
+      //Act
+      newStylist.Save();
+      Stylist savedStylist = Stylist.GetAll()[0];
+
+      //Assert
+      Assert.Equal(newStylist, savedStylist);
+    }
+    [Fact]
+    public void Test_Find_ReturnsASpecificStylistObject()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Tracy", 17);
+      newStylist.Save();
+
+      //Act
+      Stylist foundStylist = Stylist.Find(newStylist.GetId());
+
+      //Assert
+      Assert.Equal(newStylist, foundStylist);
+    }
     // [Fact]
     // public void Test_GetClients_FindsClientsByStylistId()
     // {
