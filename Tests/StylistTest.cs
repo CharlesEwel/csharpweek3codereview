@@ -51,24 +51,24 @@ namespace HairSalon.Tests
       //Assert
       Assert.Equal(newStylist, foundStylist);
     }
-    // [Fact]
-    // public void Test_GetClients_FindsClientsByStylistId()
-    // {
-    //   //Arrange
-    //   Stylist newStylist = new Stylist("Tracy");
-    //   newStylist.Save();
-    //
-    //   Client firstClient = new Client("Jasper", newStylist.GetId());
-    //
-    //   firstClient.Save();
-    //   Client secondClient = new Client("Wendy", 2);
-    //   secondClient.Save();
-    //   List<Client> expectedResult = new List<Client> {firstClient};
-    //   //Act
-    //   List<Client> result = newStylist.GetClients();
-    //   //Assert
-    //   Assert.Equal(expectedResult, result);
-    // }
+    [Fact]
+    public void Test_GetClients_FindsClientsByStylistId()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Tracy");
+      newStylist.Save();
+
+      Client firstClient = new Client("Jasper", newStylist.GetId());
+
+      firstClient.Save();
+      Client secondClient = new Client("Wendy", 2);
+      secondClient.Save();
+      List<Client> expectedResult = new List<Client> {firstClient};
+      //Act
+      List<Client> result = newStylist.GetClients();
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
     // [Fact]
     // public void Test_Delete_DeletesStylistAndClientsByStylistId()
     // {
