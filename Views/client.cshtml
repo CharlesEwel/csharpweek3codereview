@@ -2,21 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>@Model.GetName()</title>
+    <title>@Model["client"].GetName()</title>
   </head>
   <body>
-    <h1>@Model.GetName()</h1>
+    <h1>@Model["client"].GetName()</h1>
     <p>
-      Hair Color: @Model.GetHairColor()
+      Hair Color: @Model["client"].GetHairColor()
     </p>
     <p>
-      Stylist ID: @Model.GetStylistId()
+      Stylist: <a href='/stylist/@Model["client"].GetStylistId()'>@Model["stylist"].GetName()</a>
     </p>
-    <a href="/client/edit/@Model.GetId()">Edit Client</a>
+    <a href='/client/edit/@Model["client"].GetId()'>Edit Client</a>
     <form action="/clients" method="post">
       <input type="hidden" name="_method" value="DELETE">
-      <input type="hidden" name="client-id" value="@Model.GetId()">
+      <input type="hidden" name="client-id" value='@Model["client"].GetId()'>
       <button type="submit">Delete Client</button>
     </form>
+    <a href="/clients">View All Clients</a>
+    <a href="/">Return Home</a>
   </body>
 </html>

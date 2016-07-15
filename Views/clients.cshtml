@@ -19,6 +19,7 @@
     else
     {
       <h1>@Model["stylist"].GetName()</h1>
+      <h4>Price: $@Model["stylist"].GetPrice()</h4>
     }
     @if(Model["clients"].Count==0)
     {
@@ -41,6 +42,8 @@
       </form>
     }
     <a href="/client/new">Add a New Client</a>
+    <a href="/stylists">View All Stylists</a>
+    <a href="/"></a>
     <a href="/">Return Home</a>
   </body>
 </html>

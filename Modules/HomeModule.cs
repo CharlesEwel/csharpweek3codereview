@@ -43,11 +43,11 @@ namespace HairSalon
       };
 
       Get["/stylist/{id}"]=parameters=>{
-        Stylist currentStylist = Stylist.Find(parameters.id);
         Dictionary<string, object> model = new Dictionary<string, object>{};
-        List<Client> allClients = Client.GetAll();
+        Stylist currentStylist = Stylist.Find(parameters.id);
+        List<Client> currentClients = currentStylist.GetClients();
         model.Add("stylist", currentStylist);
-        model.Add("clients", allClients);
+        model.Add("clients", currentClients);
         return View["clients.cshtml", model];
       };
 
@@ -104,8 +104,12 @@ namespace HairSalon
       };
 
       Get["/client/{id}"]=parameters=>{
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         Client currentClient = Client.Find(parameters.id);
-        return View["client.cshtml", currentClient];
+        Stylist currentStylist = Stylist.Find(currentClient.GetStylistId());
+        model.Add("stylist", currentStylist);
+        model.Add("client", currentClient);
+        return View["client.cshtml", model];
       };
 
       Get["/client/edit/{id}"]=parameters=>{
