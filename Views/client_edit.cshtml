@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Edit Client: @Model["client"].GetName()</title>
+    @using System.Collections.Generic;
   </head>
   <body>
     <h1>@Model["client"].GetName()</h1>
@@ -10,17 +11,32 @@
       <input type="hidden" name="_method" value="PATCH">
       <input type="hidden" name="client-id" value='@Model["client"].GetId()'>
       <label for="hair-color">Change Hair Color</label>
+      @{List<string> haircolors = new List<string>{"Blonde", "Brunette", "Red", "Other"};}
       <select name="hair-color">
-        <option>Blonde</option>
-        <option>Brunette</option>
-        <option>Red</option>
-        <option>Other</option>
+        @foreach(string haircolor in haircolors)
+        {
+          if(haircolor==Model["client"].GetHairColor())
+          {
+            <option selected="selected">@haircolor</option>
+          }
+          else
+          {
+            <option>@haircolor</option>
+          }
+        }
       </select>
       <label for="stylist-id">Change Stylist</label>
       <select name="stylist-id">
         @foreach(var individualStylist in Model["stylists"])
         {
-          <option value='@individualStylist.GetId()'>@individualStylist.GetName()</option>
+          if(individualStylist.GetId()==Model["client"].GetStylistId())
+          {
+            <option selected="selected" value='@individualStylist.GetId()'> @individualStylist.GetName()</option>
+          }
+          else
+          {
+            <option value='@individualStylist.GetId()'>@individualStylist.GetName()</option>
+          }
         }
       </select>
       <button type="submit" name="button">Add Client</button>

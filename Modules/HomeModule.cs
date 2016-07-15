@@ -42,6 +42,13 @@ namespace HairSalon
       };
 
 
+      Delete["/clients"]=_=>{
+        Client currentClient = Client.Find(Request.Form["client-id"]);
+        currentClient.Delete();
+        List<Client> allClients = Client.GetAll();
+        return View["clients.cshtml", allClients];
+      };
+
       Get["/clients"]=_=>{
         List<Client> allClients = Client.GetAll();
         return View["clients.cshtml", allClients];

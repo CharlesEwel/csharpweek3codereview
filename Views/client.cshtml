@@ -13,5 +13,10 @@
       Stylist ID: @Model.GetStylistId()
     </p>
     <a href="/client/edit/@Model.GetId()">Edit Client</a>
+    <form action="/clients" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="client-id" value="@Model.GetId()">
+      <button type="submit">Delete Client</button>
+    </form>
   </body>
 </html>
