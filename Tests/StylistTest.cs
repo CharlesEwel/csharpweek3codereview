@@ -55,13 +55,13 @@ namespace HairSalon.Tests
     public void Test_GetClients_FindsClientsByStylistId()
     {
       //Arrange
-      Stylist newStylist = new Stylist("Tracy");
+      Stylist newStylist = new Stylist("Tracy", 18);
       newStylist.Save();
 
-      Client firstClient = new Client("Jasper", newStylist.GetId());
+      Client firstClient = new Client("Jasper", "brunette", newStylist.GetId());
 
       firstClient.Save();
-      Client secondClient = new Client("Wendy", 2);
+      Client secondClient = new Client("Wendy", "blonde", 2);
       secondClient.Save();
       List<Client> expectedResult = new List<Client> {firstClient};
       //Act

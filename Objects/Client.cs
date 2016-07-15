@@ -238,7 +238,7 @@ namespace HairSalon.Objects
         foundClientHairColor = rdr.GetString(2);
         foundClientStylistId = rdr.GetInt32(3);
       }
-      Client newClient = new Client(clientName, clientStylistId, clientUserId, clientRating, foundClientId);
+      Client newClient = new Client(foundClientName, foundClientHairColor, foundClientStylistId, foundClientId);
       if (rdr != null)
       {
         rdr.Close();

@@ -80,46 +80,46 @@ namespace HairSalon.Objects
       return allStylists;
     }
 
-    // public List<Client> GetClients()
-    // {
-    //   List<Client> allClientsMatchingStylist = new List<Client>{};
-    //   SqlConnection conn = DB.Connection();
-    //   SqlDataReader rdr = null;
-    //   conn.Open();
-    //
-    //
-    //   SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id = @stylistId;", conn);
-    //
-    //   SqlParameter stylistIdParameter = new SqlParameter();
-    //   stylistIdParameter.ParameterName = "@stylistId";
-    //   stylistIdParameter.Value = this.GetId().ToString();
-    //
-    //
-    //
-    //   cmd.Parameters.Add(stylistIdParameter);
-    //
-    //   rdr = cmd.ExecuteReader();
-    //
-    //   while(rdr.Read())
-    //   {
-    //     int clientId = rdr.GetInt32(0);
-    //     string clientName = rdr.GetString(1);
-    //     int clientStylistId = rdr.GetInt32(2);
-    //     double averageRating = rdr.GetDouble(3);
-    //     Client newClient = new Client(clientName, clientStylistId, clientId, averageRating);
-    //     allClientsMatchingStylist.Add(newClient);
-    //   }
-    //   if (rdr != null)
-    //   {
-    //     rdr.Close();
-    //   }
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    //   return allClientsMatchingStylist;
-    // }
-    //
+    public List<Client> GetClients()
+    {
+      List<Client> allClientsMatchingStylist = new List<Client>{};
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id = @stylistId;", conn);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@stylistId";
+      stylistIdParameter.Value = this.GetId().ToString();
+
+
+
+      cmd.Parameters.Add(stylistIdParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
+        string clientHairColor = rdr.GetString(2);
+        int clientStylistId = rdr.GetInt32(3);
+        Client newClient = new Client(clientName, clientHairColor, clientStylistId, clientId);
+        allClientsMatchingStylist.Add(newClient);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allClientsMatchingStylist;
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();
