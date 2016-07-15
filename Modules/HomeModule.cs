@@ -23,6 +23,13 @@ namespace HairSalon
         return View["stylists.cshtml", allStylists];
       };
 
+      Delete["/stylists"]=_=>{
+        Stylist currentStylist = Stylist.Find(Request.Form["stylist-id"]);
+        currentStylist.Delete();
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["stylists.cshtml", allStylists];
+      };
+
       Get["/stylist/new"]=_=>View["stylist_new.cshtml"];
 
       Post["/stylist/new/success"]=_=>{
@@ -37,21 +44,43 @@ namespace HairSalon
 
       Get["/stylist/{id}"]=parameters=>{
         Stylist currentStylist = Stylist.Find(parameters.id);
-        List<Client> currentClients = currentStylist.GetClients();
-        return View["clients.cshtml", currentClients];
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        List<Client> allClients = Client.GetAll();
+        model.Add("stylist", currentStylist);
+        model.Add("clients", allClients);
+        return View["clients.cshtml", model];
       };
 
+      Get["/stylist/edit/{id}"]=parameters=>{
+        Stylist currentStylist = Stylist.Find(parameters.id);
+        return View["stylist_edit.cshtml", currentStylist];
+      };
+
+      Patch["/stylist/edit/success"]=_=>{
+        Stylist currentStylist = Stylist.Find(Request.Form["stylist-id"]);
+        currentStylist.SetPrice(Request.Form["price"]);
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["stylists.cshtml", allStylists];
+      };
 
       Delete["/clients"]=_=>{
         Client currentClient = Client.Find(Request.Form["client-id"]);
         currentClient.Delete();
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         List<Client> allClients = Client.GetAll();
-        return View["clients.cshtml", allClients];
+        string currentStylist = "All";
+        model.Add("stylist", currentStylist);
+        model.Add("clients", allClients);
+        return View["clients.cshtml", model];
       };
 
       Get["/clients"]=_=>{
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         List<Client> allClients = Client.GetAll();
-        return View["clients.cshtml", allClients];
+        string currentStylist = "All";
+        model.Add("stylist", currentStylist);
+        model.Add("clients", allClients);
+        return View["clients.cshtml", model];
       };
 
       Get["/client/new"]=_=>{
@@ -66,14 +95,12 @@ namespace HairSalon
                                           Request.Form["stylist-id"]
                                         );
         newClient.Save();
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         List<Client> allClients = Client.GetAll();
-        return View["clients.cshtml", allClients];
-      };
-
-      Get["/stylist/{id}"]=parameters=>{
-        Stylist currentStylist = Stylist.Find(parameters.id);
-        List<Client> currentClients = currentStylist.GetClients();
-        return View["clients.cshtml", currentClients];
+        string currentStylist = "All";
+        model.Add("stylist", currentStylist);
+        model.Add("clients", allClients);
+        return View["clients.cshtml", model];
       };
 
       Get["/client/{id}"]=parameters=>{
@@ -94,8 +121,12 @@ namespace HairSalon
         Client currentClient = Client.Find(Request.Form["client-id"]);
         currentClient.SetHairColor(Request.Form["hair-color"]);
         currentClient.SetStylistId(Request.Form["stylistId"]);
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         List<Client> allClients = Client.GetAll();
-        return View["clients.cshtml", allClients];
+        string currentStylist = "All";
+        model.Add("stylist", currentStylist);
+        model.Add("clients", allClients);
+        return View["clients.cshtml", model];
       };
     }
   }

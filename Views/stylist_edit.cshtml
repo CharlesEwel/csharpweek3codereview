@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Stylist: @Model.GetName()</title>
+  </head>
+  <body>
+    <h1>Edit Stylist: @Model.GetName()</h1>
+    <form class="form-group" action="/stylist/edit/success" method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="hidden" name="stylist-id" value="@Model.GetId()">
+      <label for="price">Price:</label>
+      <input type="number" min=1 name="price" required>
+      <button type="submit">Edit Stylist</button>
+    </form>
+  </body>
+</html>
