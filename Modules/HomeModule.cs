@@ -12,7 +12,11 @@ namespace HairSalon
     {
       Get["/"]=_=> View["index.cshtml"];
 
-      DELETE["/"]
+      Delete["/"]=_=>{
+        Client.DeleteAll();
+        Stylist.DeleteAll();
+        return View["index.cshtml"];
+      };
 
       Get["/stylists"]=_=>{
         List<Stylist> allStylists = Stylist.GetAll();

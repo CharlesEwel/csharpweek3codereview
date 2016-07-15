@@ -6,18 +6,31 @@
   </head>
   <body>
     <h1>Add a New Client</h1>
-    <form class="form-group" action="/client/new/success" method="post">
-      <label for="client-name">Client Name:</label>
-      <input type="text" name="client-name" required>
-      <label for="hair-color">Hair Color:</label>
-      <input type="text" name="hair-color" required>
-      <select name="stylist-id">
-        @foreach(var individualStylist in Model)
-        {
-          <option value='@individualStylist.GetId()'>@individualStylist.GetName()</option>
-        }
-      </select>
-      <button type="submit" name="button">Add Client</button>
-    </form>
+    @if(Model.Count==0)
+    {
+      <p>
+        Sorry but no stylists have been added yet. One cannot create clients until there are stylists to assign them to. Click <a href="/stylist/new">here</a> to create a new stylist.
+      </p>
+    }
+    else
+    {
+      <form class="form-group" action="/client/new/success" method="post">
+        <label for="client-name">Client Name:</label>
+        <input type="text" name="client-name" required>
+        <select name="hair-color">
+          <option>Blonde</option>
+          <option>Brunette</option>
+          <option>Red</option>
+          <option>Other</option>
+        </select>
+        <select name="stylist-id">
+          @foreach(var individualStylist in Model)
+          {
+            <option value='@individualStylist.GetId()'>@individualStylist.GetName()</option>
+          }
+        </select>
+        <button type="submit" name="button">Add Client</button>
+      </form>
+    }
   </body>
 </html>
