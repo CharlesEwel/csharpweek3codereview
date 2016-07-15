@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stylists</title>
+  </head>
+  <body>
+    <h1>Stylists</h1>
+    @if(Model.Count==0)
+    {
+      <p>Sorry no Stylists have been added yet</p>
+    }
+    else
+    {
+      foreach(var individualStylist in Model)
+      {
+        <li>@individualStylist.GetName()</li>
+      }
+    }
+    <a href="/stylist/new">Add a New Stylist</a>
+    <a href="/">Return Home</a>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Stylist</title>
+  </head>
+  <body>
+    <h1>Add a New Stylist</h1>
+    <form class="form-group" action="/stylist/new/success" method="post">
+      <label for="stylist-name">Stylist Name:</label>
+      <input type="text" name="stylist-name" required>
+      <label for="price">Price:</label>
+      <input type="number" min=1 name="price" required>
+      <button type="submit" name="button">Add Stylist</button>
+    </form>
+  </body>
+</html>
